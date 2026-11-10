@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write   # needed to request the OIDC token
+  id-token: write
   contents: read
 
 concurrency:
@@ -20,32 +20,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-               - name: Debug OIDC
-           env:
-             ROLE: ${{ secrets.AWS_ROLE_ARN }}
-           run: |
-             echo "Longitud del ARN: ${#ROLE} (debe ser 54)"
-             TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | python3 -c "import sys,json;print(json.load(sys.stdin)['value'])")
-             echo "$TOKEN" | python3 -c "import sys,json,base64;p=sys.stdin.read().split('.')[1];p+='='*(-len(p)%4);d=json.loads(base64.urlsafe_b64decode(p));print({k:d.get(k) for k in ('sub','aud','iss')})"
+
+      - name: Debug OIDC
+        env:
+          ROLE: ${{ secrets.AWS_ROLE_ARN }}
+        run: |
+          echo "Longitud del ARN: ${#ROLE} (debe ser 54)"
+          RESP=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com")
+          echo "$RESP" | python3 -c "import sys,json,base64; t=json.load(sys.stdin)['value']; p=t.split('.')[1]; p+='='*(-len(p)%4); d=json.loads(base64.urlsafe_b64decode(p)); print('sub =', d.get('sub')); print('aud =', d.get('aud'))"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Upload assets (long cache)
-        run: |
-          aws s3 sync . "s3://${{ vars.S3_BUCKET }}" --delete \
-            --exclude "*" --include "assets/*" --include "css/*" --include "js/*" \
-            --cache-control "public, max-age=604800"
-
-      - name: Upload HTML (always fresh)
-        run: |
-          aws s3 cp index.html "s3://${{ vars.S3_BUCKET }}/index.html" \
-            --cache-control "public, max-age=0, must-revalidate" --content-type "text/html; charset=utf-8"
-
-      - name: Refresh CloudFront
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN
