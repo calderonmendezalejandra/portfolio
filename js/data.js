@@ -30,10 +30,12 @@ const PBI = {
 };
 
 const PROJECTS = [
-  { id:'tagliatella', cat:'dashboards', title:'Executive dashboard for La Tagliatella', blurb:'Power BI executive dashboard for a restaurant chain.',
+  { id:'tagliatella', cat:'dashboards', title:'Executive dashboard for La Tagliatella', blurb:'Power BI dashboard with DAX measures on a restaurant’s sales, styled after La Tagliatella.',
     pv:()=>`<img src="${TAG_COVER}" width="720" alt="Cover of the La Tagliatella executive dashboard">`, real:true,
-    summary:'An executive-level Power BI dashboard for the restaurant chain La Tagliatella, with KPIs built as DAX measures. Use the filters inside the report to explore it.',
-    did:[], tools:['Power BI','DAX measures','Power Query','Data modelling'],
+    summary:'A business intelligence exercise built on an Excel dataset that the university gave us: about 42,000 sales from a restaurant between 2023 and 2025. We were asked for specific DAX measures; I built the report and adapted its look to La Tagliatella’s brand.\n\nAfter a cover page, it has three pages: an overview of revenue, costs and profit by shift, category, product type and payment method; sales by year, four-month period and payment type; and monthly profit, which can be filtered by employee.',
+    didTitle:'My part',
+    did:['Loaded and modelled the Excel dataset in Power BI','Created the DAX measures we were asked for: units sold, revenue, costs and profit','Added buttons that switch the summary table between shift, category, product type and payment','Adapted the colours, fonts and ornaments to La Tagliatella’s visual identity'],
+    tools:['Power BI','DAX','Excel','Data modelling','Report design'],
     embeds:[{title:'La Tagliatella executive dashboard', url:PBI.tagliatella}], links:[] },
   { id:'china-bi', cat:'dashboards', title:'China in the world', blurb:'Power BI report on China’s economy and trade, built with web-scraped data, Power Query and DAX.',
     pv:()=>`<img src="${CHINA_COVER}" width="720" alt="Cover of the China in the world dashboard">`, real:true,
@@ -86,16 +88,16 @@ const PROJECTS = [
   { id:'wechat', cat:'cases', title:'WeChat as a super app', blurb:'Final degree project: the technology, business model and social impact of WeChat’s Mini Program ecosystem.',
     pv:()=>`<img src="${IMG}j-wechat.jpg" width="720" alt="WeChat Mini Programs from many brands">`, real:true,
     summary:'My final degree project at URJC: “WeChat as a super app: technology, business synergies and social consequences of the Mini Program ecosystem”. It studies Weixin, the mainland China version of WeChat, through the three lenses of my degree: the technology that runs it, the business model that makes it viable and its impact on society. It explains how a 2011 messaging app became the place where 1.2 billion people chat, pay, shop and reach public services, and why the West has no equivalent.',
-    facts:[['1.2 bn','monthly active users (2023)'],['2.3 M','Mini Programs, with no download or install'],['¥67.8 tn','WeChat Pay transactions in Q3 2023']],
+    
     didTitle:'What it covers',
     did:['The evolution from messaging (2011) to official accounts (2012), WeChat Pay (2013) and Mini Programs (2017)','How Mini Programs work: apps under 10 MB that run inside WeChat and reuse WeChat Pay and the user’s identity','Tencent’s business model: revenue streams, incentives for brands and developers, and WeCom as the bridge between companies and customers','The social side: data and privacy, user dependence and WeChat as semi-public infrastructure, from public services to COVID health codes','Why no Western company has built an equivalent'],
     tools:['Platform analysis','Business model analysis','Literature review','Tencent developer and investor documentation'],
     note:'In progress. Built on academic articles, Tencent’s technical and corporate documentation and industry reports, plus my own screenshots from using WeChat in Shenzhen.', links:[] },
   { id:'bpmn', cat:'process', title:'BPMN: music licensing process', blurb:'Process model with four participants, from the request to the final approval.',
     pv:()=>`<img src="${BPMN_IMG}" width="720" alt="BPMN diagram of a music licensing process">`, real:true, diagram:true,
-    summary:'A BPMN model of a music licensing process with four participants: the users who request and pay for music, a collecting society, the artists and the producers. The society checks who manages the rights, handles each request and pays the artists and producers.',
+    summary:'An exercise for my Process Engineering course: modelling in BPMN how music played in public gets licensed.\n\nThere are four participants: the users who want to play music, a collecting society, the artists and the producers. When the request arrives, the society first asks for payment: if it does not arrive, the order is cancelled.\n\nOnce paid, it handles the artist’s side and the producer’s side at the same time. For each one it checks who manages the rights: if it manages them itself, it decides directly; if the artist or the producer manages them, it forwards the request and waits for their answer. When both sides approve, it pays the artists and producers and the user can play the music; if either rejects, the order is cancelled and the user is told.',
     didTitle:'What it shows',
-    did:['Four pools with message flows between them','Exclusive gateways for accepting or rejecting each request','Parallel gateways to handle artists and producers at the same time','Sub-processes that show how artists and producers manage a request'], tools:['BPMN','bpmn.io'], links:[] },
+    did:['Four pools that talk to each other only through message flows','Exclusive gateways that decide who manages the rights: the society, the artist or the producer','A parallel gateway to handle the artist’s and the producer’s side at the same time','An end event for each outcome: order fulfilled, order cancelled or payment not received','Artist and producer sub-processes to accept or reject the request'], tools:['BPMN','bpmn.io'], links:[] },
   { id:'starbucks', cat:'presentations', title:'Starbucks in China: strategic plan', blurb:'A plan to help Starbucks win back ground in China from Luckin Coffee and Manner: three strategic lines with SMART objectives, KPIs and a roadmap.',
     pv:()=>`<img src="${SB_IMG}" width="720" alt="Cover slide of the Starbucks analysis presentation">`, real:true,
     summary:'A group presentation for my Marketing course at Shenzhen University about Starbucks in China, where local chains such as Luckin Coffee and Manner are taking market share.\n\nAfter analysing the current strategy and the challenges, we proposed three strategic lines: reinventing the product, with healthier drinks and limited editions inspired by traditional Chinese flavours such as osmanthus and lychee; stepping up digital marketing on Douyin and Xiaohongshu, with influencers, user-generated content campaigns and personalised offers in the app based on big data; and building a more resilient supply chain, with more local sourcing, predictive inventory analytics and suppliers certified for sustainable practices.\n\nEach line became SMART objectives with measurable KPIs and a one-year roadmap. What you see here are the parts I made.',
@@ -119,12 +121,14 @@ const PROJECTS = [
     tools:['Canva','DJI Mini 4 Pro','Generative AI','WeChat quiz (Wenjuanxing)','Metrics reports'],
     embeds:[{title:'Dream Team blind box video', url:'https://www.canva.cn/design/DAGqsEpjDgI/bj2qFindQ6LHP8B3WXfGDg/watch?embed', ratio:'16/9'}],
     links:[{label:'Watch the video',url:'https://khsj.cn/83wobyu5mp0ngyr'},{label:'Try the quiz',url:'https://www.wjx.cn/vm/e5AXnkH.aspx'}] },
-  { id:'lumio', cat:'presentations', title:'Lumio Studio', blurb:'Web and mobile app proposal for a veterinary clinic.',
+  { id:'lumio', cat:'presentations', tags:['presentations','apps'], title:'Lumio Studio · Vet clinic web and app', blurb:'Website and mobile app proposal for a real veterinary clinic, with interactive prototypes in Figma. Grade: 9, the highest in the class.',
     pv:()=>`<img src="${LUM_IMG}" width="720" alt="Cover slide of the Lumio Studio proposal">`, real:true,
-    summary:'A proposal to develop a website and a mobile app for a veterinary clinic, presented under the name Lumio Studio.',
-    did:['Designed the proposal presentation in Canva'], tools:['Canva','Web and app proposal'],
+    summary:'A group project for my Human-Computer Interaction course. As a made-up digital agency, Lumio Studio, we prepared a website and mobile app proposal for a real client: La Avanzada, the veterinary clinic where I take my dog.\n\nStarting from the clinic’s current website, we set the requirements: online appointments with reminders, a profile for each vet, each pet’s medical history and discounts to keep clients coming back. We drew the wireframes in MockFlow, built interactive prototypes in Figma, and planned the project over 22 weeks with a budget of 76,500 €.\n\nWe got a 9, the highest grade in the class.',
+    didTitle:'My part',
+    did:['Designed the interactive Figma prototypes of the website and the mobile app, from the group’s wireframes','Designed the proposal presentation in Canva'],
+    tools:['Figma','MockFlow','UX/UI','Wireframes','Prototyping','Canva'],
     embeds:[{title:'Lumio presentation', url:'https://www.canva.com/design/DAHH91sr3ag/2bv5LGPPYjwxdP0BUNajcw/view?embed', ratio:'16/9'}],
-    links:[{label:'Open the presentation',url:'https://www.canva.com/design/DAHH91sr3ag/2bv5LGPPYjwxdP0BUNajcw/view'}] }
+    links:[{label:'Try the website prototype',url:'https://www.figma.com/proto/E2YMe8BOgoGr90naYoTgb5/Lumio-Studio---La-Avanzada-Web?node-id=1-2&p=f&t=X4vUGi3yN1oMFY5K-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2'},{label:'Try the app prototype',url:'https://www.figma.com/proto/ZfExJvB2iCAszamYEqSlkq/Lumio-Studio---La-Avanzada-App-m%C3%B3vil?node-id=0-1&t=LyvOD9cn49GiIn2P-1'},{label:'Open the presentation',url:'https://www.canva.com/design/DAHH91sr3ag/2bv5LGPPYjwxdP0BUNajcw/view'}] }
 ];
 
 const STOPS = [
