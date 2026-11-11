@@ -66,7 +66,7 @@ const ES = {
   plural: { dashboards:'Dashboards', apps:'Aplicaciones web', cases:'Casos de estudio', process:'Procesos', presentations:'Presentaciones' },
   links: {
     'Visit the website':'Visitar la web','Read the business plan':'Leer el plan de empresa','Open the dashboard':'Abrir el dashboard',
-    'Visit the prototype':'Ver el prototipo','Visit the landing page':'Ver la landing page','See the value proposition canvas':'Ver el canvas de propuesta de valor','Open the presentation':'Abrir la presentación','Watch the video':'Ver el vídeo','Try the quiz':'Probar el cuestionario'
+    'Visit the prototype':'Ver el prototipo','Visit the landing page':'Ver la landing page','See the value proposition canvas':'Ver el canvas de propuesta de valor','Open the presentation':'Abrir la presentación','Watch the video':'Ver el vídeo','Try the quiz':'Probar el cuestionario','Open the whiteboard':'Abrir la pizarra'
   },
   embeds: { 'Regional economic analysis':'Análisis económico regional', 'Orders analysis':'Análisis de pedidos' },
   projects: {
@@ -82,6 +82,11 @@ const ES = {
       didTitle:'Qué muestra',
       did:['Caja positiva desde el segundo mes: el primer año cierra con 36.889 € en tesorería, por encima de los 30.000 € de inversión','Rentabilidad económica del 48 % y financiera del 25 % el primer año','Unos 1.089 clientes potenciales estimados en la zona','Renta media por hogar de 63.069 €, 1,98 veces la media española','4 de los 5 municipios con más renta están a menos de 15 minutos en coche','Una web que explica el servicio en tres pasos, con precios según el tamaño del perro, opiniones, zonas de servicio y formulario de reserva'],
       tools:['Power BI','Análisis de mercado','Mapas','Diseño web','Netlify'] },
+    'pizarra': { blurb:'Pizarra colaborativa en tiempo real que programé para mis clases online de matemáticas y que uso cada semana.',
+      summary:'Durante años di mis clases con Microsoft Whiteboard, hasta que Microsoft lo cerró este mes y dejó de funcionar. Tenía que buscar otra pizarra y, como además quiero dar más clases online, decidí hacer la mía.\n\nLo más importante para mí era poder ver cómo mis alumnos resuelven los ejercicios sin mi ayuda: los alumnos con tablet escriben en la pizarra y yo lo veo en directo. Al terminar cada clase les mando la pizarra con todo lo explicado ese día, algo que siempre agradecen.\n\nEl alumno entra con un enlace, sin registrarse. La programé con ayuda de Claude (IA): definí lo que tenía que hacer, dirigí el desarrollo, la desplegué en AWS y la probé en clases reales.',
+      didTitle:'Qué hace',
+      did:['Los alumnos escriben con su tablet y yo lo veo en directo, con el cursor de cada uno','Exportar toda la pizarra en alta resolución (PNG o SVG), sin marca de agua, para enviarla después de clase','Zoom de hasta el 3.000 % para escribir con comodidad','Cuentas de profe con código de invitación y carpetas por asignatura','Modo solo lectura para que los alumnos no dibujen','Un botón dentro de la sala que abre el enlace de Google Meet de la clase'],
+      extra:{ title:'Cómo está hecha', items:['Angular 21 con TypeScript estricto, componentes standalone, signals y rutas bajo demanda','Excalidraw (React) integrado en un componente de Angular como motor de dibujo','Servidor Node.js con Express para la API y Socket.io para sincronizar a varias personas dibujando a la vez','Seguridad: contraseñas cifradas con scrypt, sesiones firmadas con HMAC, bloqueo tras intentos fallidos y límites contra abusos','Desplegada en AWS Lightsail con Docker y Caddy para el HTTPS automático','Pruebas automáticas de cuentas, permisos, límites y de dos usuarios dibujando a la vez'] } },
     'tracker-8d': { title:'Dashboard de Power BI de reclamaciones 8D', blurb:'Dashboard de Power BI con los datos de Q-Alert para seguir las reclamaciones de calidad por el método 8D.',
       summary:'Un dashboard de Power BI que hice durante mis prácticas en Bosch con los datos de Q-Alert, para seguir las reclamaciones de calidad a lo largo del proceso de resolución 8D.',
       did:['Escribí las medidas DAX y las columnas calculadas detrás de las cifras','Construí tablas de calendario para analizar por semana, mes y año','Añadí segmentadores dinámicos para que cada equipo vea su parte'],
@@ -181,7 +186,8 @@ const ES = {
 ES.groups = {
   bosch:{ role:'Prácticas en Quality 4.0', when:'nov 2025 – jul 2026', text:'Herramientas internas para el departamento de calidad. Las imágenes son ilustraciones con datos inventados.' },
   szu:{ role:'Intercambio internacional', when:'sep 2024 – jul 2025', text:'Asignaturas de empresa y sistemas de información en uno de los grandes polos tecnológicos de China.' },
-  urjc:{ role:'Grado y TFG', text:'Dashboards, aplicaciones, modelos de procesos y propuestas de la carrera.' }
+  urjc:{ role:'Grado y TFG', text:'Dashboards, aplicaciones, modelos de procesos y propuestas de la carrera.' },
+  own:{ name:'Proyectos personales', role:'Por mi cuenta', when:'En uso', text:'Herramientas que construyo porque las necesito.' }
 };
 
 /* Merge the Spanish layer into the content before anything renders */

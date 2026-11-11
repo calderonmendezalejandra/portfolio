@@ -20,6 +20,7 @@ const LUM_IMG = IMG+'lum-img.jpg';
 const TAG_COVER = IMG+'tag-cover.jpg';
 const CHINA_COVER = IMG+'china-cover.jpg';
 const BPMN_IMG = IMG+'bpmn-img.jpg';
+const BOARD_IMG = IMG+'pizarra.jpg';
 
 /* Power BI "publish to web" links */
 const PBI = {
@@ -49,6 +50,14 @@ const PROJECTS = [
     tools:['Power BI','Market analysis','Map visuals','Web design','Netlify'],
     embeds:[{title:'Woof Studio market analysis report', url:PBI.woof, ratio:'600/373.5'}],
     links:[{label:'Visit the website',url:'https://cerulean-brigadeiros-11e431.netlify.app/'},{label:'Read the business plan',url:'https://docs.google.com/document/d/1HO-EpKNwtPu6eFQnDlGk2w5tYsxNT-JFNIPl6kWhv4Q/edit?usp=sharing'}] },
+  { id:'pizarra', cat:'apps', title:'Aula Pizarra', blurb:'Real-time collaborative whiteboard that I built for my online maths classes and use every week.',
+    pv:()=>`<img src="${BOARD_IMG}" width="720" alt="Aula Pizarra during a maths class: a system of equations solved on the board">`, real:true,
+    summary:'For years I taught my classes on Microsoft Whiteboard, until Microsoft shut it down this month and it stopped working. I had to find something new, and since I also want to give more classes online, I decided to build my own.\n\nWhat mattered most to me was being able to see how my students solve exercises without my help: students with a tablet write on the board and I watch them do it live. At the end of each class I send them the board with everything we covered that day, which they always appreciate.\n\nThe student joins with a link, without signing up. I built it with Claude (AI): I defined what it had to do, directed the development, deployed it on AWS and tested it in real classes.',
+    didTitle:'What it does',
+    did:['Students write with a tablet and I see it live, with each person’s cursor visible','Export the whole board in high resolution (PNG or SVG), with no watermark, to send after class','Zoom up to 3,000% to write comfortably','Teacher accounts, by invitation code, with folders by subject','Read-only mode so students cannot draw','A button inside the room that opens the class’s Google Meet link'],
+    extra:{ title:'How it is built', items:['Angular 21 with strict TypeScript, standalone components, signals and lazy-loaded routes','Excalidraw (React) embedded in an Angular component as the drawing engine','A Node.js server with Express for the API and Socket.io to sync several people drawing at once','Security: scrypt-hashed passwords, HMAC-signed sessions, a lockout after failed attempts and rate limits against abuse','Deployed on AWS Lightsail with Docker and Caddy for automatic HTTPS','Automated tests for accounts, permissions, limits and two users drawing at the same time'] },
+    tools:['Angular 21','TypeScript','Node.js','Express','Socket.io','Excalidraw','AWS Lightsail','Docker','Caddy','Claude'],
+    links:[{label:'Open the whiteboard',url:'https://13-37-146-43.sslip.io/'}] },
   { id:'tracker-8d', cat:'dashboards', title:'Power BI 8D claims dashboard', blurb:'Power BI dashboard on top of the Q-Alert data to follow quality claims through the 8D method.',
     pv:trackerPv,
     summary:'A Power BI dashboard built during my internship at Bosch on top of the Q-Alert data, to track quality claims through the 8D problem-solving process.',
@@ -193,5 +202,8 @@ const GROUPS = [
     items:['starbucks','pdd','dreamteam'] },
   { id:'urjc', name:'Universidad Rey Juan Carlos', role:'Degree and final thesis', when:'2022 – 2026', img:'j-ise.jpg',
     text:'Dashboards, apps, process models and proposals from my degree.',
-    items:['woof','china-bi','lumio','domesticgo','wechat','bpmn','tagliatella'] }
+    items:['woof','china-bi','lumio','domesticgo','wechat','bpmn','tagliatella'] },
+  { id:'own', name:'Personal projects', role:'Built on my own', when:'In use', img:'pizarra.jpg',
+    text:'Tools I build because I need them.',
+    items:['pizarra'] }
 ];
