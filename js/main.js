@@ -263,7 +263,7 @@ function initDiagram(){
 function openProject(id){
   const p = byId(id); if(!p) return;
   const links = (p.links || []).filter(l => l.url).map(l => `<a class="btn primary" target="_blank" rel="noopener" href="${l.url}">${l.label} ↗</a>`).join('');
-  const head = `<span class="tags">${(p.tags || [p.cat]).map(c => `<span class="tag">${CATS[c]}</span>`).join('')}</span><h3 id="dlg-t">${p.title}</h3><p>${p.summary}</p>`;
+  const head = `<span class="tags">${(p.tags || [p.cat]).map(c => `<span class="tag">${CATS[c]}</span>`).join('')}</span><h3 id="dlg-t">${p.title}</h3>${p.summary.split('\n\n').map(t => `<p>${t}</p>`).join('')}`;
   const facts = p.facts ? `<div class="metrics dlg-metrics">${p.facts.map(f => `<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('')}</div>` : '';
   const rest = `${p.did.length ? `<h4>${p.didTitle || T('dlg.did')}</h4><ul>${p.did.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}<h4>${T('dlg.tools')}</h4><div class="chips">${p.tools.map(t => `<span class="chip">${t}</span>`).join('')}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}${links ? `<div class="links">${links}</div>` : ''}`;
   if(p.diagram){
@@ -271,8 +271,8 @@ function openProject(id){
   } else if(p.embeds && p.embeds.length){
     const figs = p.embeds.map(e => `<figure class="embfig">${e.label ? `<figcaption>${e.label}</figcaption>` : ''}<div class="embed"${e.ratio ? ` style="aspect-ratio:${e.ratio}"` : ''}><iframe title="${e.title}" src="${e.url}" loading="lazy" allowfullscreen allow="fullscreen"></iframe></div><a class="btn ghost sm" target="_blank" rel="noopener" href="${e.url.replace('?embed', '')}">${T('dlg.full')}</a></figure>`).join('');
     dbody.innerHTML = p.embeds.length === 1
-      ? `<div class="dlg-grid split"><div class="embeds dlg-stick">${figs}</div><div class="dlg-txt">${head}${rest}</div></div>`
-      : `<div class="dlg-grid wide"><div class="dlg-txt">${head}</div><div class="embeds">${figs}</div><div class="dlg-txt">${rest}</div></div>`;
+      ? `<div class="dlg-grid split"><div class="embeds dlg-stick">${figs}</div><div class="dlg-txt">${head}${facts}${rest}</div></div>`
+      : `<div class="dlg-grid wide"><div class="dlg-txt">${head}${facts}</div><div class="embeds">${figs}</div><div class="dlg-txt">${rest}</div></div>`;
   } else {
     dbody.innerHTML = `<div class="dlg-grid"><div class="dlg-prev tilt dlg-stick"><span class="thumb">${p.pv()}${lab(p)}</span></div><div class="dlg-txt">${head}${facts}${rest}</div></div>`;
     tilt($('.dlg-prev', dbody), 4);

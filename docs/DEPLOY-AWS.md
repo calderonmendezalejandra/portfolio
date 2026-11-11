@@ -102,13 +102,15 @@ IAM → **Roles** → **Create role** → **Web identity**:
 
 Sin políticas por ahora → nombre `github-portfolio-deploy` → **Create role**.
 
-Abre el rol → **Trust relationships** y comprueba que la condición limita el acceso a tu repositorio y rama:
+Abre el rol → **Trust relationships** y comprueba que la condición limita el acceso a tu repositorio. Ojo: en los repositorios nuevos GitHub envía el `sub` con los IDs numéricos del usuario y del repositorio (`repo:usuario@123/portfolio@456:ref:refs/heads/main`). Si el rol falla con *Not authorized to perform sts:AssumeRoleWithWebIdentity*, mira el `sub` real y úsalo:
 
 ```json
 "Condition": {
   "StringEquals": {
-    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-    "token.actions.githubusercontent.com:sub": "repo:TU_USUARIO/portfolio:ref:refs/heads/main"
+    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+  },
+  "StringLike": {
+    "token.actions.githubusercontent.com:sub": "repo:TU_USUARIO@ID_USUARIO/portfolio@ID_REPO:*"
   }
 }
 ```
